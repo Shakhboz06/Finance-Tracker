@@ -32,17 +32,20 @@ const pending: Ref<boolean> = ref(false)
 const supabase = useSupabaseClient()
 const {toastError} = useAppToast()
 const configUrl = useRuntimeConfig()
+
 useUserLogin()
+
 
 const login = async () => {
     pending.value = true
     try {
-        const { error} = await supabase.auth.signInWithOtp({
+        const {error} = await supabase.auth.signInWithOtp({
             email: email.value,
             options: {
                 emailRedirectTo: `${configUrl.public.baseUrl}/confirmation`
             }
         })
+
         if (error) {
             toastError({
                 title: 'Invalid Details',

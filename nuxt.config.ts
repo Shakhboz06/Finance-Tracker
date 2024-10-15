@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
-    port: 5006
+    port: 3000
   },
   modules: ["@nuxt/ui", "@nuxtjs/supabase"],
   tailwindcss: {
@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      baseUrl: process.env.BASE_URL ?? 'http://localhost:5006'
+      baseUrl: process.env.BASE_URL ?? 'http://localhost:3000'
     }
   },  
 })

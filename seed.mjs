@@ -7,7 +7,8 @@ const categories = ['Bills', 'Cash', 'Eating out', 'Entertainment', 'Family', 'G
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
-    process.SUPABASE_SERVICE_KEY, {
+    // Supabase service key, 
+    {
     auth: { persistSession: false }
 });
 
