@@ -35,7 +35,6 @@ const configUrl = useRuntimeConfig()
 
 useUserLogin()
 
-
 const login = async () => {
     pending.value = true
     try {

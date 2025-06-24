@@ -51,7 +51,7 @@ export const useFetchTransactions = (period: ComputedRef<Period>) => {
         pending.value = true
         try {
             const { data } = await useAsyncData(`transaction-${period.value.from.toDateString()} - ${period.value.to.toDateString()}`, async () => {
-                const response  = await supabase.from('Transactions').select()
+                const response  = await supabase.from('transactions').select()
                 .gte('created_at', period.value.from.toISOString())
                 .lte('created_at', period.value.to.toISOString())
                 .order('created_at', { ascending: false })

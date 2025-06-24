@@ -93,7 +93,7 @@ const submitForm = async () => {
 
     if (form.value.errors.length) return
     try {
-        const {error } = await supabase.from('Transactions').upsert({
+        const {error } = await supabase.from('transactions').upsert({
             id: props.transaction?.id, ...state.value
         } as any).select()
         isLoading.value = true

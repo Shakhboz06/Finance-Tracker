@@ -7,7 +7,7 @@ const categories = ['Bills', 'Cash', 'Eating out', 'Entertainment', 'Family', 'G
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
-    // Supabase service key, 
+    // process.env.SUPABASE_KEY,
     {
     auth: { persistSession: false }
 });
@@ -18,7 +18,7 @@ const userIds = users.map(user => user.id)
 async function seedTransactions() {
     let transactions = [];
 
-    const { error: deleteError } = await supabase.from('Transactions').delete().gte('id', 0)
+    const { error: deleteError } = await supabase.from('transactions').delete().gte('id', 0)
 
     if (deleteError) {
         console.error('Error deleting existing data:', deleteError)
@@ -27,7 +27,7 @@ async function seedTransactions() {
 
     for(let user of userIds){
         for (let year = new Date().getFullYear(); year > new Date().getFullYear() - 2; year--) {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 50; i++) {
                 const date = new Date(year, faker.number.int({ min: 0, max: 11 }), faker.number.int({ min: 1, max: 28 })).toISOString()
     
                 let type, category
@@ -71,7 +71,7 @@ async function seedTransactions() {
     }
 
     
-    const { error: insertError } = await supabase.from('Transactions').upsert(transactions);
+    const { error: insertError } = await supabase.from('transactions').upsert(transactions);
     if (insertError) {
         console.error('Error inserting data:', insertError);
     } else {

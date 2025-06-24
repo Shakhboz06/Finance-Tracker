@@ -44,7 +44,7 @@ const { toastSuccess, toastError } = useAppToast()
 const deleteTransaction = async () => {
     isLoading.value = true
     try {
-        await supabase.from('Transactions').delete().eq('id', props.transaction.id)
+        await supabase.from('transactions').delete().eq('id', props.transaction.id)
         toastSuccess({
             title: 'Deleted Successfully',
         })
