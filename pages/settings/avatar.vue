@@ -28,7 +28,7 @@ const uploading = ref(false)
 const fileInput = ref()
 const saveAvatar = async () => {
     const file = fileInput.value.input.files[0]
-    console.log(file)
+    
     if (!file) {
         toastError({
             title: 'Please upload a file first!',
@@ -42,14 +42,14 @@ const saveAvatar = async () => {
     try {
         uploading.value = true
         const currentUrl = user.value?.user_metadata?.avatar_img
-        const { error } = await supabase.storage.from('Avatars').upload(fileName, file, {
+        const { error } = await supabase.storage.from('avatars').upload(fileName, file, {
             cacheControl: '3600',
             upsert: false
         })
         if (error) throw new Error(error.message)
         await supabase.auth.updateUser({ data: { avatar_img: fileName } })
         if (currentUrl) {
-            const { error } = await supabase.storage.from('Avatars').remove([currentUrl])
+            const { error } = await supabase.storage.from('avatars').remove([currentUrl])
             if (error) throw new Error(error.message)
         }
         fileInput.value.input.value = null
