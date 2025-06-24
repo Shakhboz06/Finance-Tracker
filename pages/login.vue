@@ -34,7 +34,7 @@ const {toastError} = useAppToast()
 const configUrl = useRuntimeConfig()
 
 useUserLogin()
-
+console.log(configUrl.public.BASE_URL)
 const login = async () => {
     pending.value = true
     try {
